@@ -1,5 +1,6 @@
 import cv2
 from pyzbar.pyzbar import decode
+from pyzbar.pyzbar import ZBarSymbol
 
 def ret_email(dbfile):
 
@@ -77,7 +78,7 @@ if __name__ == '__main__':
 
     while (True):
         ret, frame = capture.read()
-        for qrcode in decode(frame):
+        for qrcode in decode(frame, symbols=[ZBarSymbol.QRCODE]):
             data = qrcode.data.decode("utf-8")
             if data in lock:
                 cv2.destroyAllWindows()
